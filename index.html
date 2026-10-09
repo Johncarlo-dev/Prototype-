@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SchoovaMate | Student Task Manager</title>
+  <link rel="stylesheet" href="SchoovaStyle.css">
+  <script src="SchoovaScript.js" defer></script>
+</head>
+<body>
+  <section id="authPage" class="auth-page">
+    <div class="auth-card">
+      <div class="brand"><div class="logo-mark">S</div><div><h1>SchoovaMate</h1><p>Your school life, organized.</p></div></div>
+      <div id="loginPanel">
+        <div class="auth-heading"><span class="eyebrow">WELCOME TO SCHOOVAMATE</span><h2>Sign in to continue</h2><p>Teachers create a class room and students join with the section name and room password.</p></div>
+        <div class="role-selector"><button type="button" id="studentRoleBtn" class="role-btn active">🎓 Student</button><button type="button" id="teacherRoleBtn" class="role-btn">👩‍🏫 Teacher</button></div>
+        <form id="loginForm">
+          <label for="loginIdentifier" id="identifierLabel">Student LRN</label><input id="loginIdentifier" type="text" placeholder="Enter your LRN" autocomplete="username" required>
+          <label for="loginPassword">Password</label><div class="password-wrap"><input id="loginPassword" type="password" placeholder="Enter your password" autocomplete="current-password" required><button type="button" id="passwordToggle" class="password-toggle" aria-label="Show password">👁</button></div>
+          <label class="remember-option"><input type="checkbox" id="rememberLogin"><span>Remember my ID on this device</span></label><p id="loginError" class="error-message" role="alert"></p><button type="submit" id="loginSubmit" class="primary-btn">Sign In</button>
+        </form>
+        <div class="auth-links"><button type="button" id="showTeacherRegister" class="text-btn">Register teacher account</button><button type="button" id="showStudentRegister" class="text-btn">Register as a student</button></div>
+        <div class="demo-info"><h3>How registration works</h3><p>1. A teacher creates the first teacher account.</p><p>2. The teacher creates a section (for example, Honesty) and a room password.</p><p>3. Students join with the matching section name and room password. Student registration is unlimited.</p><p class="security-note">Prototype note: accounts are stored in this browser only.</p></div>
+      </div>
+      <div id="teacherRegisterPanel" class="hidden"><div class="auth-heading"><span class="eyebrow">SET UP THE CLASS</span><h2>Teacher registration</h2><p>Create your class room and set a password students need to join.</p></div>
+        <form id="teacherRegisterForm"><label for="teacherName">Teacher full name</label><input id="teacherName" type="text" placeholder="Enter your full name" required><label for="teacherId">Teacher ID</label><input id="teacherId" type="text" placeholder="Create a teacher ID" minlength="4" required><label for="teacherPassword">Password</label><input id="teacherPassword" type="password" placeholder="At least 8 characters" minlength="8" required><label for="teacherPasswordConfirm">Confirm password</label><input id="teacherPasswordConfirm" type="password" placeholder="Re-enter password" minlength="8" required><label for="teacherSectionName">Section name</label><input id="teacherSectionName" type="text" placeholder="e.g. Honesty" required><label for="teacherRoomPassword">Room join password</label><input id="teacherRoomPassword" type="password" placeholder="Create a room password" minlength="4" required><label for="teacherRoomPasswordConfirm">Confirm room password</label><input id="teacherRoomPasswordConfirm" type="password" placeholder="Re-enter room password" minlength="4" required><p id="teacherRegisterError" class="error-message" role="alert"></p><button type="submit" class="primary-btn full-width">Create Teacher Account</button></form><button type="button" id="backFromTeacherRegister" class="text-btn">← Back to sign in</button>
+      </div>
+      <div id="studentRegisterPanel" class="hidden"><div class="auth-heading"><span class="eyebrow">JOIN YOUR CLASS</span><h2>Student registration</h2><p id="studentRegistrationInfo">A teacher must create a room before students can join.</p></div>
+        <form id="studentRegisterForm"><label for="studentName">Student full name</label><input id="studentName" type="text" placeholder="Enter your full name" required><label for="studentLrn">Student LRN</label><input id="studentLrn" type="text" inputmode="numeric" placeholder="Enter your LRN" minlength="4" required><label for="studentSectionName">Section name</label><input id="studentSectionName" type="text" placeholder="Enter your teacher's section name" required><label for="studentRoomPassword">Room join password</label><input id="studentRoomPassword" type="password" placeholder="Enter room password" required><label for="studentPassword">Create password</label><input id="studentPassword" type="password" placeholder="At least 8 characters" minlength="8" required><label for="studentPasswordConfirm">Confirm password</label><input id="studentPasswordConfirm" type="password" placeholder="Re-enter password" minlength="8" required><p id="studentRegisterError" class="error-message" role="alert"></p><button type="submit" class="primary-btn full-width">Create Student Account</button></form><button type="button" id="backFromStudentRegister" class="text-btn">← Back to sign in</button>
+      </div>
+      <p class="auth-footer">SchoovaMate · School productivity prototype</p>
+    </div>
+  </section>
+
+  <section id="dashboardPage" class="dashboard hidden">
+    <aside class="sidebar">
+      <div class="sidebar-brand"><div class="logo-mark small-logo">S</div><div><strong>SchoovaMate</strong><small>Learning companion</small></div></div>
+      <div class="sidebar-user"><div class="avatar" id="userAvatar">S</div><div><strong id="sidebarUserName">Student</strong><small id="sidebarUserRole">Student</small></div></div>
+      <p class="nav-label">MENU</p>
+      <nav class="navigation">
+        <button class="nav-btn active" data-view="overview">▦ Overview</button>
+        <button class="nav-btn" data-view="tasks">✓ My Tasks <span id="taskNavCount" class="nav-count">0</span></button>
+        <button class="nav-btn" data-view="announcements">▤ Announcements</button>
+      </nav>
+      <div class="sidebar-bottom"><p>Stay organized. Keep learning.</p><button type="button" id="logoutBtn" class="logout-btn">↪ Log Out</button></div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div><span class="eyebrow">SCHOOL WORKSPACE</span><h2 id="headerPageTitle">Overview</h2></div>
+        <div class="topbar-user"><div><strong id="headerUserName">Student</strong><small id="headerUserRole">Student account</small></div><div class="avatar header-avatar" id="headerAvatar">S</div></div>
+      </header>
+
+      <section id="overviewView" class="content-view">
+        <div class="welcome-banner">
+          <div><span class="eyebrow">YOUR PERSONAL WORKSPACE</span><h1 id="welcomeHeading">Welcome back!</h1><p>Plan your work, track your progress, and stay on top of school.</p><p id="currentDate" class="date-label"></p></div>
+          <div class="welcome-symbol">✦</div>
+        </div>
+        <div id="teacherCapacityPanel" class="capacity-panel hidden"><div><strong id="roomSectionHeading">Class room</strong><p id="studentCapacityText">0 students registered</p><p id="roomSectionDescription">Students can join with your section name and room password.</p></div><span id="capacityBadge" class="capacity-badge">Unlimited students</span></div><form id="roomSetupForm" class="form-card hidden"><h2>Set up your class room</h2><p class="room-setup-help">Your existing teacher account needs a section name and room password before students can join.</p><label for="roomSetupSection">Section name</label><input id="roomSetupSection" type="text" placeholder="e.g. Honesty" required><label for="roomSetupPassword">Room join password</label><input id="roomSetupPassword" type="password" minlength="4" placeholder="Create a room password" required><label for="roomSetupPasswordConfirm">Confirm room password</label><input id="roomSetupPasswordConfirm" type="password" minlength="4" placeholder="Re-enter room password" required><p id="roomSetupError" class="error-message" role="alert"></p><button class="primary-btn" type="submit">Save Room Settings</button></form><div id="teacherProgressPanel" class="progress-panel hidden"><div class="section-heading"><div><h2>Student task progress</h2><p>See whether each student has completed each assigned task.</p></div></div><div id="teacherProgressTable" class="progress-table-wrap"></div></div>
+        <div class="stats-grid">
+          <article class="stat-card"><span class="stat-icon purple">▤</span><p>Total tasks</p><h2 id="totalTasks">0</h2><small>All your tasks</small></article>
+          <article class="stat-card"><span class="stat-icon orange">◷</span><p>Pending tasks</p><h2 id="pendingTasks">0</h2><small>Still to complete</small></article>
+          <article class="stat-card"><span class="stat-icon green">✓</span><p>Completed tasks</p><h2 id="completedTasks">0</h2><small>Work finished</small></article>
+        </div>
+        <div class="section-heading"><div><h2>Recent tasks</h2><p>Keep an eye on what's coming up.</p></div><button type="button" class="secondary-btn" data-go="tasks">View all tasks →</button></div>
+        <div id="recentTasks" class="task-list"></div>
+        <div class="section-heading announcement-heading"><div><h2>Latest announcements</h2><p>Important updates for your schoolwork.</p></div><button type="button" class="secondary-btn" data-go="announcements">View all →</button></div>
+        <div id="recentAnnouncements" class="announcement-list"></div>
+      </section>
+
+      <section id="tasksView" class="content-view hidden">
+        <div class="section-heading page-heading"><div><h1>My Tasks</h1><p>Add schoolwork, set deadlines, and track completion.</p></div><button type="button" id="addTaskBtn" class="primary-btn">+ Add Task</button></div>
+        <div class="filters"><input type="search" id="taskSearch" placeholder="Search tasks or subjects..."><select id="taskFilter"><option value="all">All tasks</option><option value="pending">Pending</option><option value="completed">Completed</option></select></div>
+        <form id="taskForm" class="form-card hidden">
+          <h2 id="taskFormHeading">Add a new task</h2>
+          <label for="taskTitle">Task title</label><input id="taskTitle" type="text" placeholder="e.g. Research introduction" required>
+          <label for="taskSubject">Subject</label><input id="taskSubject" type="text" placeholder="e.g. Practical Research" required>
+          <label for="taskDueDate">Due date</label><input id="taskDueDate" type="date" required>
+          <label for="taskPriority">Priority</label><select id="taskPriority"><option value="Normal">Normal</option><option value="High">High</option><option value="Low">Low</option></select>
+          <div class="form-actions"><button type="submit" class="primary-btn">Save Task</button><button type="button" id="cancelTaskBtn" class="secondary-btn">Cancel</button></div>
+        </form>
+        <div id="allTasks" class="task-list"></div>
+      </section>
+
+      <section id="announcementsView" class="content-view hidden">
+        <div class="section-heading page-heading"><div><h1>Announcements</h1><p>Read and share important school updates.</p></div><button type="button" id="addAnnouncementBtn" class="primary-btn hidden">+ Post Announcement</button></div>
+        <form id="announcementForm" class="form-card hidden">
+          <h2>New announcement</h2>
+          <label for="announcementTitle">Announcement title</label><input id="announcementTitle" type="text" placeholder="Enter a title" required>
+          <label for="announcementMessage">Message</label><textarea id="announcementMessage" rows="4" placeholder="Write the announcement..." required></textarea>
+          <div class="form-actions"><button type="submit" class="primary-btn">Publish</button><button type="button" id="cancelAnnouncementBtn" class="secondary-btn">Cancel</button></div>
+        </form>
+        <div id="allAnnouncements" class="announcement-list"></div>
+      </section>
+    </main>
+  </section>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
